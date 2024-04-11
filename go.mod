@@ -1,6 +1,6 @@
 module github.com/metalpoch/livekit-server
 
-go 1.21.8
+go 1.20
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
