@@ -1,15 +1,14 @@
 package handler
 
 import (
-	"os"
 	"time"
 
 	"github.com/livekit/protocol/auth"
 )
 
 func Token(room, identity string) (string, error) {
-	apiKey := os.Getenv("LIVEKIT_API_KEY")
-	apiSecret := os.Getenv("LIVEKIT_API_SECRET")
+	apiKey := "devkey"
+	apiSecret := "secret"
 
 	at := auth.NewAccessToken(apiKey, apiSecret)
 	grant := &auth.VideoGrant{

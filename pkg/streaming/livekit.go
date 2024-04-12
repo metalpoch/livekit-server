@@ -2,7 +2,6 @@ package streaming
 
 import (
 	"context"
-	"os"
 
 	"github.com/livekit/protocol/livekit"
 	lksdk "github.com/livekit/server-sdk-go/v2"
@@ -10,9 +9,9 @@ import (
 
 func getRoomClient() *lksdk.RoomServiceClient {
 	return lksdk.NewRoomServiceClient(
-		os.Getenv("LIVEKIT_HOST_URL"),
-		os.Getenv("LIVEKIT_API_KEY"),
-		os.Getenv("LIVEKIT_API_SECRET"),
+		"http://127.0.0.1:7880",
+		"devkey",
+		"secret",
 	)
 }
 
