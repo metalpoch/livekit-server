@@ -1,23 +1,23 @@
-package handler
+package routes
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
-	"github.com/metalpoch/livekit-server/model"
 	"github.com/metalpoch/livekit-server/pkg/streaming"
 )
 
-func GetRooms(w http.ResponseWriter, r *http.Request) {
+func ListAvailableRooms(w http.ResponseWriter, r *http.Request) {
 	rooms, err := streaming.ListRooms()
 
 	if err != nil {
 		w.WriteHeader(http.StatusBadGateway)
-		json.NewEncoder(w).Encode(&model.Exception{
-			Error: err.Error(),
-		})
+		fmt.Fprint(w, rooms)
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(&rooms)
+
 }

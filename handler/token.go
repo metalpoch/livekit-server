@@ -7,7 +7,7 @@ import (
 	"github.com/livekit/protocol/auth"
 )
 
-func GetJoinToken(room, identity string) (string, error) {
+func Token(room, identity string) (string, error) {
 	apiKey := os.Getenv("LIVEKIT_API_KEY")
 	apiSecret := os.Getenv("LIVEKIT_API_SECRET")
 
@@ -17,8 +17,9 @@ func GetJoinToken(room, identity string) (string, error) {
 		Room:     room,
 	}
 	at.AddGrant(grant).
+		SetName(identity).
 		SetIdentity(identity).
-		SetValidFor(time.Hour)
+		SetValidFor(48 * time.Hour)
 
 	return at.ToJWT()
 }

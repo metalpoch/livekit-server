@@ -1,43 +1,28 @@
 package routes
 
 import (
-	"encoding/json"
+	"fmt"
 	"net/http"
 
+	"github.com/google/uuid"
 	"github.com/metalpoch/livekit-server/handler"
-	"github.com/metalpoch/livekit-server/model"
 )
 
-func GetToken(w http.ResponseWriter, r *http.Request) {
-	var room string
-	var identity string
+func GenerateToken(w http.ResponseWriter, r *http.Request) {
+	var room string = uuid.New().String()
 
-	queryParams := r.URL.Query()
-	w.Header().Set("Content-Type", "application/json")
-
-	if room = queryParams.Get("room"); room == "" {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(&model.Exception{
-			Error: "room param is required",
-		})
+	username := r.URL.Query().Get("username")
+	if username == "" {
+		fmt.Fprint(w, "username param is required")
 		return
 	}
 
-	if identity = queryParams.Get("identity"); identity == "" {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(&model.Exception{
-			Error: "identity param is required",
-		})
-		return
-	}
-	token, err := handler.GetJoinToken(room, identity)
+	token, err := handler.Token(room, username)
 	if err != nil {
-		panic(err)
+		fmt.Fprint(w, err.Error())
+		return
 	}
 
-	json.NewEncoder(w).Encode(&model.Token{
-		Token:    token,
-		Room:     room,
-		Identity: identity,
-	})
+	fmt.Fprint(w, token)
+
 }

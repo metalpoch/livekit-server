@@ -1,6 +1,13 @@
 module github.com/metalpoch/livekit-server
 
-go 1.20
+go 1.21
+
+toolchain go1.21.8
+
+require (
+	github.com/livekit/protocol v1.12.0
+	github.com/livekit/server-sdk-go/v2 v2.1.0
+)
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -25,9 +32,7 @@ require (
 	github.com/lithammer/shortuuid/v4 v4.0.0 // indirect
 	github.com/livekit/mageutil v0.0.0-20230125210925-54e8a70427c1 // indirect
 	github.com/livekit/mediatransportutil v0.0.0-20240302142739-1c3dd691a1b8 // indirect
-	github.com/livekit/protocol v1.12.0 // indirect
 	github.com/livekit/psrpc v0.5.3-0.20240228172457-3724cb4adbc4 // indirect
-	github.com/livekit/server-sdk-go/v2 v2.1.0 // indirect
 	github.com/magefile/mage v1.15.0 // indirect
 	github.com/nats-io/nats.go v1.31.0 // indirect
 	github.com/nats-io/nkeys v0.4.6 // indirect

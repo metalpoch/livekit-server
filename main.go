@@ -23,9 +23,10 @@ func checkEnvVar() {
 func main() {
 	checkEnvVar()
 	mux := http.NewServeMux()
-	mux.HandleFunc("/api/token", routes.GetToken)
-	mux.HandleFunc("/api/room", routes.Room)
-	mux.HandleFunc("/api/participants", routes.Participant)
+	mux.HandleFunc("/generate-token", routes.GenerateToken)
+	mux.HandleFunc("/generate-token-to-join", routes.GenerateTokenToJoin)
+	mux.HandleFunc("/get-available-rooms", routes.ListAvailableRooms)
+	mux.HandleFunc("/create-room", routes.CreateRoom)
 
-	log.Fatal(http.ListenAndServe("0.0.0.0:8080", mux))
+	log.Fatal(http.ListenAndServe(":8080", mux))
 }
